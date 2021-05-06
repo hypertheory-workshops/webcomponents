@@ -7,6 +7,7 @@
         "ecmel.vscode-html-css",
         "mariusalchimavicius.json-to-ts",
         "johnpapa.vscode-peacock",
-        "ms-dotnettools.csharp"
+        "ms-dotnettools.csharp",
+        "ms-vscode.powershell"
     ]
 }
