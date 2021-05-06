@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators'
 @Component({
@@ -9,6 +10,8 @@ import { tap } from 'rxjs/operators'
 })
 export class TemperatureComponent implements OnInit {
 
+  @Input('labelCaption') labelCaption = 'Temp';
+  @Output('temperatureChecked') temperatureChecked = new EventEmitter<TempResponse>();
   tempResult$: Observable<TempResponse>;
   constructor(private client: HttpClient) { }
 
@@ -17,10 +20,14 @@ export class TemperatureComponent implements OnInit {
 
   convert(tempEl: HTMLInputElement, unit: 'F' | 'C'): void {
     // this is abysmal. I just did this for something quick and dirty.
+    // Don't do this. Really.
     this.tempResult$ = this.client.get<TempResponse>(`http://localhost:1337/temp/${tempEl.value}/${unit}`)
       .pipe(
-        tap(r => console.log(r))
+        tap(r => console.log(r)),
+        tap(t => this.temperatureChecked.emit(t))
       );
+
+
   }
 }
 
