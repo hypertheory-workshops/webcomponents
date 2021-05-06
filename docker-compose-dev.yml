@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+    frontend:
+        image: nginx:latest
+        ports:
+            - 8080:80
+        volumes:
+            - ./front-end:/usr/share/nginx/html
+    tempwc:
+        image: nginx:latest
+        ports:
+            - 8081:80
+        volumes:
+            - ./temperature/temp-wc/widget/:/usr/share/nginx/html
+    tempservice:
+        image: jeffrygonzalez/temperaturebe
+        build: 
+            context: ./temperature/backend
+        ports:
+            - 1337:80
+

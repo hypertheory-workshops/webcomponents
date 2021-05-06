@@ -1,0 +1,14 @@
+<div class="form-group">
+  <label for="temp">Temperature:</label>
+  <input class="form-control"
+         #temp
+         id="temp">
+  <button (click)="convert(temp, 'F')"
+          class="btn btn-primary">Convert To Celcius</button>
+  <button (click)="convert(temp, 'C')"
+          class="btn btn-primary">Convert To Farenheit</button>
+</div>
+<ng-container *ngIf="tempResult$ | async">
+  <p>{{ (tempResult$ | async)?.tempInF}}F is {{ (tempResult$ | async)?.tempInC}}C </p>
+  <p>{{ (tempResult$ | async)?.tempInC}}C is {{ (tempResult$ | async)?.tempInF}}F </p>
+</ng-container>
